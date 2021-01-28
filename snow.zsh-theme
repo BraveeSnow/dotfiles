@@ -18,5 +18,5 @@ function git_status() {
 }
 
 PROMPT='$print_error$user_at_host::$cwd
-%(#.#.$>) '
+%{$fg[yellow]%}%(#.#.$>)%{$reset_color%} '
 RPROMPT='$(git_status)'
