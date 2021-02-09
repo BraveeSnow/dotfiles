@@ -1,19 +1,22 @@
-local print_error="%(?.=>> .%{$fg_bold[red]%}E%? <!--%{$reset_color%} )"
-local user_at_host="%{$fg_bold[cyan]%}%n%{$reset_color%}@%{$fg_bold[magenta]%}%M%{$reset_color%}"
-local cwd="%{$fg_bold[blue]%}<%//>%{$reset_color%}"
-
-ZSH_THEME_GIT_PROMPT_SUFFIX="]%{$reset_color%}"
-ZSH_THEME_GIT_PROMPT_DIRTY=" (changes made)"
-ZSH_THEME_GIT_PROMPT_CLEAN=" ( up-to-date )"
+local print_error="%(?.=>> .%{$fg[red]%}E%? <!--%{$reset_color%} )"
+local user_at_host="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[magenta]%}%M%{$reset_color%}"
+local cwd="%{$fg[blue]%}<%//>%{$reset_color%}"
 
 function git_status() {
-    if [[ ! -z $(git_prompt_info) ]]; then
+    if [[ ! -z "$(git rev-parse --git-dir 2> /dev/null)" ]]; then
+        local prefix
+        local changes
+        local suffix="]%{$reset_color%}"
+        local branch="$(git branch --show-current)"
+
         if [[ -z "$(git status --porcelain)" ]]; then
-            ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[green]%}["
+            prefix="%{$fg[green]%}["
+            changes="(*＾-＾*)"
         else
-            ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[red]%}["
+            prefix="%{$fg[red]%}["
+            changes="╰（‵□′）╯"
         fi
-        echo "$(git_prompt_info)"
+        echo "$prefix$branch $changes$suffix"
     fi
 }
 
