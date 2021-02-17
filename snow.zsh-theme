@@ -1,4 +1,4 @@
-local print_error="%(?.=>> .%{$fg[red]%}E%? <!--%{$reset_color%} )"
+local print_error="%(?..%{$fg[red]%}E%?%{$reset_color%} )"
 local user_at_host="%{$fg[cyan]%}%n%{$reset_color%}@%{$fg[magenta]%}%M%{$reset_color%}"
 local cwd="%{$fg[blue]%}<%//>%{$reset_color%}"
 
@@ -20,6 +20,7 @@ function git_status() {
     fi
 }
 
-PROMPT='$print_error$user_at_host::$cwd
-%{$fg[yellow]%}%(#.#.$>)%{$reset_color%} '
+PROMPT='
+%{$fg[yellow]%}╭─%{$reset_color%}$print_error$user_at_host::$cwd
+%{$fg[yellow]%}╰%(#.#.<$>)%{$reset_color%} '
 RPROMPT='$(git_status)'
