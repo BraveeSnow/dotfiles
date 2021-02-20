@@ -20,7 +20,6 @@ function git_status() {
     fi
 }
 
-PROMPT='
-%{$fg[yellow]%}╭─%{$reset_color%}$print_error$user_at_host::$cwd
+PROMPT='%{$fg[yellow]%}╭─%{$reset_color%}$print_error$user_at_host::$cwd
 %{$fg[yellow]%}╰%(#.#.<$>)%{$reset_color%} '
 RPROMPT='$(git_status)'
